@@ -34,6 +34,7 @@
       <li class="list-group-item">location_pathname = <span id="location_pathname"></span></li>
       <li class="list-group-item">location_search   = <span id="location_search"></span></li>
       <li class="list-group-item">location_hash     = <span id="location_hash"></span></li>
+      <li class="list-group-item">search     = <span id="search"></span></li>
     </ul>
     <div class="alert alert-danger mt-3" role="alert">
       <pre>        
@@ -58,6 +59,14 @@
     var location_pathname = location.pathname ;
     var location_search   = location.search   ;
     var location_hash     = location.hash     ;
+    
+    var search = location.search.replace('?', '').split("&");//取得參數字串
+    var parameter = [];
+    for(i in search){
+      var temp = search[i].split("=",2);//將參數各自分離
+      parameter[temp[0]] = temp[1];//組合參數
+    }
+    //console.log(parameter);
 
     $("#location_href").text(location_href);
     $("#location_protocol").text(location_protocol);
