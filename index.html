@@ -27,27 +27,29 @@
   <div class="container mt-5">
     
     <h4 class="mb-3 text-center">點二下-聯絡我們</h4>
-    <form  id="myForm">
-      <div class="row mb-5">
-        <div class="col-md-6">
-          <label for="name">姓名</label>
-          <input type="text" class="form-control" id="name" name="name" value="" required>
-        </div>
-        <div class="col-md-6">
-          <label for="tel">電話</label>
-          <input type="text" class="form-control" id="tel" name="tel" value=""
-            required>
-        </div>
-        <div class="col-md-12">
-          <label for="content">聯絡內容</label>
-          <textarea class="form-control" id="content" name="content" required></textarea>
-        </div>
-      </div> 
-      <input type="hidden" id="key" name="key" value="">  
-      <input type="hidden" id="rowId" name="rowId" value="">
-      <input type="hidden" id="op" name="op" value="insert">
-      <button class="btn btn-primary btn-block" type="submit">送出</button>
-    </form> 
+    <div>
+      <form  id="myForm">
+        <div class="row mb-5">
+          <div class="col-md-6">
+            <label for="name">姓名</label>
+            <input type="text" class="form-control" id="name" name="name" value="" required>
+          </div>
+          <div class="col-md-6">
+            <label for="tel">電話</label>
+            <input type="text" class="form-control" id="tel" name="tel" value=""
+              required>
+          </div>
+          <div class="col-md-12">
+            <label for="content">聯絡內容</label>
+            <textarea class="form-control" id="content" name="content" required></textarea>
+          </div>
+        </div> 
+        <input type="hidden" id="key" name="key" value="">  
+        <input type="hidden" id="rowId" name="rowId" value="">
+        <input type="hidden" id="op" name="op" value="insert">
+        <button class="btn btn-primary btn-block" type="submit">送出</button>
+      </form> 
+    </div>
 
     <div class="alert alert-danger mt-3" role="alert">
       這是範例測試，資料請亂即可，填完之後，可再編輯。實際應用時，訪客無法看到所有資料！
