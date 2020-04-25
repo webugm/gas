@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>點二下-聯絡我們</title>
+  
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+   
+</head>
+
+<!-- 
+  時間戳記	關鍵	姓名	電話	聯絡內容
+  Timestamp	key	name	tel	content
+ -->
+<body>
+  <div class="container mt-5">
+    
+    <h4 class="mb-3 text-center">點二下-聯絡我們</h4>
+    <form  id="myForm">
+      <div class="row mb-5">
+        <div class="col-md-6">
+          <label for="name">姓名</label>
+          <input type="text" class="form-control" id="name" name="name" value="" required>
+        </div>
+        <div class="col-md-6">
+          <label for="tel">電話</label>
+          <input type="text" class="form-control" id="tel" name="tel" value=""
+            required>
+        </div>
+        <div class="col-md-12">
+          <label for="content">聯絡內容</label>
+          <textarea class="form-control" id="content" name="content" required></textarea>
+        </div>
+      </div>      
+      <input type="hidden" id="key" name="key" value="">
+      <input type="hidden" id="titleRow" name="titleRow" value=1>
+      <input type="hidden" id="headRow" name="headRow" value=2>
+      <button class="btn btn-primary btn-block" type="submit">送出</button>
+    </form> 
+    <hr class="mb-4">
+    <div id="result"></div>
+    <hr class="mb-4"> 
+  
+  </div>
+  <script data-cfasync="false" type="text/javascript">
+    jQuery(document).ready(function($) {
+      var key = Date.now();//關鍵
+      $("#key").val(key);
+      // variable to hold request
+      var request;
+      // bind to the submit event of our form
+      $("#myForm").submit(function(event){
+        // abort any pending request
+        if (request) {
+          request.abort();
+        }
+        // setup some local variables
+        var $form = $(this);
+        // let's select and cache all the fields
+        var $inputs = $form.find("input, select, button, textarea");
+        // serialize the data in the form
+        var serializedData = $form.serialize();
+      
+        // let's disable the inputs for the duration of the ajax request
+        // Note: we disable elements AFTER the form data has been serialized.
+        // Disabled form elements will not be serialized.
+        //讓我們在ajax請求期間禁用輸入
+        //注意：在表格數據已序列化之後，我們將禁用元素。
+        //禁用的表單元素將不會序列化。
+        $inputs.prop("disabled", true);
+        $('#result').text('資料傳送中...');
+      
+        // fire off the request to /form.php
+        request = $.ajax({
+          url: "https://script.google.com/macros/s/AKfycbxgDPwbqYVhL8BTXHA0cMuFRMYKvPipuqpbsGCv83iMNz4FlEmX/exec",
+          type: "post",
+          data: serializedData
+        });
+      
+        // callback handler that will be called on success
+        request.done(function (response, textStatus, jqXHR){
+          //log a message to the console
+          var message = "<h1 class='text-center'>您送出的內容</h1>"; 
+              message += "<table class='table table-striped table-bordered table-hover table-sm'>\n";
+              message += "<thead>\n";
+              message += "<tr class='table-primary'>\n";
+              for (i in response.titles){
+                message += "<th>" + response.titles[i] + "</th>\n";
+              }              
+              message += "</tr>\n";             
+              message += "</thead>\n";
+
+              message += "<tbody>\n";
+              message += "<tr>\n";
+
+              for (i in response.row){
+                message += "<td>" + response.row[i] + "</td>\n";
+              }              
+
+              message += "</tr>\n";
+              message += "</tbody>\n";
+              message += "</table>\n";
+          $('#result').html(message + '<br><a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRPSWrL35IyEhJat_8g6dvUrKprS5tFANO7n8oX5I_L37F9TPY7o57aw7BQUbZuvba3zpVSA3V8sJix/pubhtml?gid=0&single=true" target="_blank">成功 - 觀看Google 試算表</a>');
+          //console.log(response); 
+
+        });
+      
+        // callback handler that will be called on failure
+        request.fail(function (jqXHR, textStatus, errorThrown){
+          // log the error to the console
+          console.error(
+            "The following error occured: "+
+            textStatus, errorThrown
+          );
+        });
+      
+        // callback handler that will be called regardless
+        // if the request failed or succeeded
+        request.always(function () {
+          // reenable the inputs
+          $inputs.prop("disabled", false);
+          $inputs.val("");
+          $("#titleRow").val(1);
+          $("#headRow").val(2);
+          $("#key").val(Date.now());
+        });
+      
+        // prevent default posting of form
+        event.preventDefault();
+      });
+    });
+  </script>
+
+  
+</body>
+<!-- 
+  網址：https://web.ugm.one/gas/
+  試算表： https://docs.google.com/spreadsheets/d/1h_nmc0JNjO8kHMpFwkVAjZ1v4JeGfT2fHpWxDRZIIRU/edit?usp=sharing
+  GS： https://script.google.com/d/16ZPLcO0C46fjuGHfc4FD8bmPVH98g5ApKSlwIZBqUaKBLicpQd7atlfB/edit?mid=ACjPJvEX-bo0quWF9gC8G8XxOg-K0HUo1y1kJlTYqmfsEOxs_7drVwBZvNM0Y0ervcSFLuM--IFbSC-vHOdES7VJ3NDV4HVOI1nugfokMvLfqVIEqzyHpARBCR4FDOS6OS5Rcsxkg-O-78w&uiv=2
+ -->
+</html>

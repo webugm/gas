@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>用 JavaScript 取得目前網址與其它網址參數簡單語法</title>
+  
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+   
+</head>
+
+<body>
+  <div class="container mt-5">    
+    <h4 class="mb-3 text-center">用 JavaScript 取得目前網址與其它網址參數簡單語法</h4> 
+    <div class="alert alert-primary" role="alert">
+      <strong>網址：</strong>getUrl.html?row=5&key=123#333
+    </div>
+    <ul class="list-group">
+      <li class="list-group-item">location_href     = <span id="location_href"></span></li>
+      <li class="list-group-item">location_protocol = <span id="location_protocol"></span></li>
+      <li class="list-group-item">location_hostname = <span id="location_hostname"></span></li>
+      <li class="list-group-item">location_host     = <span id="location_host"></span></li>
+      <li class="list-group-item">location_port     = <span id="location_port"></span></li>
+      <li class="list-group-item">location_pathname = <span id="location_pathname"></span></li>
+      <li class="list-group-item">location_search   = <span id="location_search"></span></li>
+      <li class="list-group-item">location_hash     = <span id="location_hash"></span></li>
+    </ul>
+    <div class="alert alert-danger mt-3" role="alert">
+      <pre>
+        
+        var location_href     = location.href     ;
+        var location_protocol = location.protocol ;
+        var location_hostname = location.hostname ;
+        var location_host     = location.host     ;
+        var location_port     = location.port     ;
+        var location_pathname = location.pathname ;
+        var location_search   = location.search   ;
+        var location_hash     = location.hash     ;
+      </pre>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var location_href     = location.href     ;
+    var location_protocol = location.protocol ;
+    var location_hostname = location.hostname ;
+    var location_host     = location.host     ;
+    var location_port     = location.port     ;
+    var location_pathname = location.pathname ;
+    var location_search   = location.search   ;
+    var location_hash     = location.hash     ;
+
+    $("#location_href").text(location_href);
+    $("#location_protocol").text(location_protocol);
+    $("#location_hostname").text(location_hostname);
+    $("#location_host").text(location_host);
+    $("#location_port").text(location_port);
+    $("#location_pathname").text(location_pathname);
+    $("#location_search").text(location_search);
+    $("#location_hash").text(location_hash);
+    
+
+    // 　alert('location.href: '+location.href);　//輸出値為 location.href: http://www.wibibi.com/test.html?tid=222#333
+    // 　alert('location.protocol: '+location.protocol);　//輸出値為 location.protocol: http:
+    // 　alert('location.hostname: '+location.hostname);　//輸出値為 location.hostname: www.wibibi.com
+    // 　alert('location.host: '+location.host);　//輸出値為 location.host: www.wibibi.com
+    // 　alert('location.port: '+location.port);　//輸出値為 80
+    // 　alert('location.pathname: '+location.pathname);　//輸出値為 location.pathname: /test.html
+    // 　alert('location.search: '+location.search);　//輸出値為 location.search: ?tid=222
+    // 　alert('location.hash: '+location.hash);　//輸出値為 location.hash: #333
+    </script>
+  
+</body>
+</html>
